@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "602777218029",
+    "project_id": "proyecto-desarrollo-fd510",
+    "storage_bucket": "proyecto-desarrollo-fd510.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602777218029:android:0d3fab3514695736e855e4",
+        "android_client_info": {
+          "package_name": "com.example.poyectodesarrollodeinterfaces"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8Z82CMCqXISztzMjaKpqIlky3gWv-5Dw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
