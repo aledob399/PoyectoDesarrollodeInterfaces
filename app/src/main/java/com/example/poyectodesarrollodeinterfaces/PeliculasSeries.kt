@@ -108,11 +108,11 @@ class PeliculasSeries : AppCompatActivity() {
             ).apply {
                 setMargins(8.dpToPx(), 0, 8.dpToPx(), 0)
             }
-            imageButton.setBackgroundResource(pelicula.imagenResId)
+            imageButton.setBackgroundResource(pelicula.imagen)
             imageButton.setOnClickListener {
                 intent.putExtra("titulo",pelicula.titulo)
                 intent.putExtra("sinopsis",pelicula.sinopsis)
-                intent.putExtra("imagen",pelicula.imagenResId)
+                intent.putExtra("imagen",pelicula.imagen)
                 intent.putExtra("videoUrl",pelicula.videoUrl)
             }
             imageContainer.addView(imageButton)
@@ -134,12 +134,12 @@ class PeliculasSeries : AppCompatActivity() {
             ).apply {
                 setMargins(8.dpToPx(), 0, 8.dpToPx(), 0)
             }
-            imageButton.setBackgroundResource(serie.imagenResId)
+            imageButton.setBackgroundResource(serie.imagen)
             imageButton.setOnClickListener {
                 val intent=Intent(this,InfoPeliSerie::class.java)
                 intent.putExtra("titulo",serie.titulo)
                 intent.putExtra("sinopsis",serie.sinopsis)
-                intent.putExtra("imagen",serie.imagenResId)
+                intent.putExtra("imagen",serie.imagen)
                 intent.putExtra("videoUrl",serie.videoUrl)
                 startActivity(intent)
             }
@@ -156,13 +156,13 @@ class PeliculasSeries : AppCompatActivity() {
 data class Pelicula(
     val titulo: String = "",
     val sinopsis: String = "",
-    val imagenResId: Int = 0, // Identificador de recurso de la imagen
+    val imagen: Int = 0, // Identificador de recurso de la imagen
     val videoUrl: String = ""
 )
 
 data class Serie(
     val titulo: String = "",
     val sinopsis: String = "",
-    val imagenResId: Int = 0, // Identificador de recurso de la imagen
+    val imagen: Int = 0, // Identificador de recurso de la imagen
     val videoUrl: String = ""
 )
