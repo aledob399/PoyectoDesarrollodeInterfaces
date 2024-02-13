@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        FirebaseApp.initializeApp(this)
 
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
@@ -46,6 +48,7 @@ class MainActivity : AppCompatActivity() {
                         if (documentSnapshot.exists()) {
                             val user = documentSnapshot.toObject(User::class.java)
                             if (user != null && user.password == password) {
+
                                 // Iniciar sesión exitosamente
                                 val intent = Intent(this@MainActivity, PeliculasSeries::class.java)
                                 startActivity(intent)
