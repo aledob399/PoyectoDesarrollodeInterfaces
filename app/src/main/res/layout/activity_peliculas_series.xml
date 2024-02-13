@@ -8,36 +8,47 @@
 
     <!-- ImageButton arriba a la derecha -->
 
-    <!-- Botón de Series -->
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="97dp"
-        android:layout_height="77dp"
-        android:layout_margin="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/ic_launcher_background"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/imgPerfilCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="234dp"
+        android:layout_marginTop="121dp"
+        android:layout_marginEnd="50dp"
+        app:cardCornerRadius="100dp"
+        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    <ImageButton
+        android:id="@+id/imgPerfil"
+        android:layout_width="87dp"
+        android:layout_height="92dp"
+        android:scaleType="centerCrop"
+        />
+</androidx.cardview.widget.CardView>
+
+
 
     <Button
         android:id="@+id/btnSeries"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Series"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton"
+        app:layout_constraintTop_toBottomOf="@+id/imgPerfilCard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnPeliculas"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"/>
 
-    <!-- Botón de Películas -->
+
     <Button
         android:id="@+id/btnPeliculas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Películas"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton"
+        app:layout_constraintTop_toBottomOf="@+id/imgPerfilCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnSeries"
         android:layout_marginTop="16dp"

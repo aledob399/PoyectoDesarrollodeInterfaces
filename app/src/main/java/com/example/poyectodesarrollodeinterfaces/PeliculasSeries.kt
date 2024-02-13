@@ -1,29 +1,50 @@
 package com.example.poyectodesarrollodeinterfaces
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.HorizontalScrollView
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.tasks.Task
+import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 
 class PeliculasSeries : AppCompatActivity() {
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val seriesCollection = firestore.collection("series")
     private val pelisCollection = firestore.collection("peliculas")
+    private val usuarioCollection = firestore.collection("usuario")
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_peliculas_series)
 
-        // Crear un conjunto de películas
+        val fotoPerfil = findViewById<ImageButton>(R.id.imgPerfil)
+        val nombreUsuario = intent.getStringExtra("nombreUsuario")
 
-        val pelis: List<Pelicula> = añadirPelis()
+        if (nombreUsuario != null) {
+            val storageReference = FirebaseStorage.getInstance().reference.child("imagenes/$nombreUsuario.jpg")
+            storageReference.downloadUrl.addOnSuccessListener { uri ->
+                Glide.with(this)
+                    .load(uri)
+                    .into(fotoPerfil)
+            }.addOnFailureListener { exception ->
+                Toast.makeText(this, "Error al cargar la imagen de perfil", Toast.LENGTH_SHORT).show()
+            }
+        }
+        fotoPerfil.setOnClickListener {
+            val intent=Intent(this,MiPerfil::class.java)
+            intent.putExtra("nombreUsuario",nombreUsuario)
+            startActivity(intent)
+        }
+
+        val pelis: List<Pelicula> = cargarPeliculas()
+/*
         for (p in pelis) {
             pelisCollection.add(p)
                 .addOnSuccessListener {
@@ -36,11 +57,15 @@ class PeliculasSeries : AppCompatActivity() {
 
 
         }
-        // Agregar las películas a la base de datos Firestore
-       // agregarPelicula(pelis[0])
 
-        // Crear un conjunto de series
-        val series: List<Serie> = añadirSeries()
+ */
+
+
+
+
+
+        val series: List<Serie> = cargarSeries()
+/*
         for (s in series) {
             seriesCollection.add(s)
                 .addOnSuccessListener {
@@ -51,11 +76,15 @@ class PeliculasSeries : AppCompatActivity() {
                     Toast.makeText(this, "Error al añadir la serie", Toast.LENGTH_SHORT).show()
                 }
         }
-        // Agregar las series a la base de datos Firestore
-      //  agregarSerie(series[0])
+
+
+ */
+
+
 
         val btnPelis = findViewById<Button>(R.id.btnPeliculas)
         val btnSeries = findViewById<Button>(R.id.btnSeries)
+        mostrarImagenesPeliculas(pelis)
 
         btnPelis.setOnClickListener {
             mostrarImagenesPeliculas(pelis)
@@ -74,15 +103,15 @@ class PeliculasSeries : AppCompatActivity() {
                 for (document in documents) {
                     val titulo = document.getString("titulo") ?: ""
                     val sinopsis = document.getString("sinopsis") ?: ""
-                    val imagenResId = document.getLong("imagen")?.toInt() ?: 0
+                    val imagen = document.getLong("imagen")?.toInt() ?: 0
                     val videoUrl = document.getString("videoUrl") ?: ""
 
-                    val pelicula = Pelicula(titulo, sinopsis, R.drawable.breakingbad, videoUrl)
+                    val pelicula = Pelicula(titulo, sinopsis, imagen, videoUrl)
                     peliculasList.add(pelicula)
                 }
             }
             .addOnFailureListener { exception ->
-                // Manejar el error de carga de datos
+                Toast.makeText(this, "Error al cargar la pelicula", Toast.LENGTH_SHORT).show()
             }
 
         return peliculasList
@@ -98,15 +127,15 @@ class PeliculasSeries : AppCompatActivity() {
                 for (document in documents) {
                     val titulo = document.getString("titulo") ?: ""
                     val sinopsis = document.getString("sinopsis") ?: ""
-                    val imagenResId = document.getLong("imagen")?.toInt() ?: 0
+                    val imagen = document.getLong("imagen")?.toInt() ?: 0
                     val videoUrl = document.getString("videoUrl") ?: ""
 
-                    val serie = Serie(titulo, sinopsis, imagenResId, videoUrl)
+                    val serie = Serie(titulo, sinopsis, imagen, videoUrl)
                     seriesList.add(serie)
                 }
             }
             .addOnFailureListener { exception ->
-                // Manejar el error de carga de datos
+                Toast.makeText(this, "Error al cargar la serie", Toast.LENGTH_SHORT).show()
             }
 
         return seriesList
@@ -117,7 +146,7 @@ class PeliculasSeries : AppCompatActivity() {
 
         // Agregar películas a la lista
         peliculas.add(Pelicula("Max payne", "Para resolver una serie de asesinatos en Nueva York se unen un detective de policía y un asesino, que serán perseguidos por la policía, la mafia y una corporación despiadada.", R.drawable.maxpayne, "https://www.youtube.com/watch?v=GklHaGfncJI"))
-        peliculas.add(Pelicula("El hombre lobo", "Al regresar a su tierra ancestral, un hombre americano es mordido y posteriormente maldecido por un hombre lobo.", R.drawable.elhombrelobo, "https://www.youtube.com/watch?v=Wff_63MgPPI"))
+       // peliculas.add(Pelicula("El hombre lobo", "Al regresar a su tierra ancestral, un hombre americano es mordido y posteriormente maldecido por un hombre lobo.", R.drawable.elhombrelobo, "https://www.youtube.com/watch?v=Wff_63MgPPI"))
         peliculas.add(Pelicula("John Wick (Otro día para matar)", "Un ex-sicario sale de su retiro para perseguir a los gángsters que mataron a su perro y le robaron el coche.", R.drawable.johnwick, "https://www.youtube.com/watch?v=TWRxFTiNTyU"))
         peliculas.add(Pelicula("Juego de armas", "Basada libremente en la historia real de dos jóvenes, David Packouz y Efraim Diveroli, que consiguieron un contrato de trescientos millones de dólares del Pentágono para armar a los aliados de Estados Unidos en Afganistán.", R.drawable.juegodearmas, "https://www.youtube.com/watch?v=C0eT-Vcovqc"))
         peliculas.add(Pelicula("Los odiosos ocho", "En pleno invierno de Wyoming, un cazarrecompensas y su prisionero encuentran refugio en una cabaña habitada actualmente por una colección de nefastos personajes.", R.drawable.losodiososocho, "https://www.youtube.com/watch?v=JxVRgBOL8jc"))
@@ -130,10 +159,10 @@ class PeliculasSeries : AppCompatActivity() {
         return peliculas
     }
 
-    // Función para agregar películas a Firestore
 
 
-    // Función para crear un conjunto de series
+
+
     private fun añadirSeries(): List<Serie> {
         val series = mutableListOf<Serie>()
 
@@ -142,7 +171,7 @@ class PeliculasSeries : AppCompatActivity() {
         series.add(Serie("Hermanos de sangre", "La historia de la Easy Company de la División Aerotransportada 101 del Ejército de los Estados Unidos y su misión en la Segunda Guerra Mundial en Europa, desde la Operación Overlord hasta el Día V-J.", R.drawable.hermanosdesangre, "https://www.youtube.com/watch?v=aH06LWZs-Ys"))
         series.add(Serie("Juego de tronos", "Nueve familias nobles luchan por el control de las tierras de Poniente, mientras un antiguo enemigo regresa tras permanecer inactivo durante milenios.", R.drawable.juegodetronos, ""))
         series.add(Serie("Chernobyl", "Esta apasionante miniserie narra la impactante historia del peor accidente provocado por el hombre de la historia, siguiendo la tragedia desde el momento de la explosión a primera hora de la mañana hasta el caos y la pérdida de vidas en los días, semanas y meses siguientes.", R.drawable.chernobyl, ""))
-        series.add(Serie("Sherlock", "El peculiar giro del icónico detective de Conan Doyle lo presenta como un \"sociópata de alto funcionamiento\" en el Londres actual. Le ayuda en sus investigaciones: John Watson, veterano de la guerra de Afganistán, que es presentado a Holmes por un conocido común.", R.drawable.sherlock, ""))
+       // series.add(Serie("Sherlock", "El peculiar giro del icónico detective de Conan Doyle lo presenta como un \"sociópata de alto funcionamiento\" en el Londres actual. Le ayuda en sus investigaciones: John Watson, veterano de la guerra de Afganistán, que es presentado a Holmes por un conocido común.", R.drawable.sherlock, ""))
         series.add(Serie("Los Soprano", "El jefe de la mafia de Nueva Jersey Tony Soprano se enfrenta a problemas personales y profesionales en su vida familiar y empresarial que afectan a su estado mental, lo que le lleva a buscar ayuda psiquiátrica profesional.", R.drawable.lossoprano, ""))
         series.add(Serie("Rick y Morty", "Las fracturadas vidas domésticas de un científico loco nihilista y su ansioso nieto se complican aún más con sus desventuras interdimensionales.", R.drawable.rickymorty, ""))
         series.add(Serie("Friends", "Sigue la vida personal y profesional de seis amigos de veinte a treinta años que viven en el barrio de Manhattan, en Nueva York.", R.drawable.friends, ""))
@@ -155,37 +184,13 @@ class PeliculasSeries : AppCompatActivity() {
         return series
     }
 
-    // Función para agregar series a Firestore
-    fun agregarPelicula(pelicula: Pelicula) {
-        firestore.collection("peliculas")
-            .document(pelicula.titulo.toString())
-            .set(pelicula)
-            .addOnSuccessListener { documentReference ->
-                // La película se agregó correctamente a Firestore
-                Toast.makeText(this, "Película agregada correctamente", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener { exception ->
-                // Error al agregar la película a Firestore
-                Toast.makeText(this, "Error al agregar la película", Toast.LENGTH_SHORT).show()
-            }
-    }
 
-    // Función para agregar una serie a Firestore
-    fun agregarSerie(serie: Serie) {
-        firestore.collection("series")
-            .document(serie.titulo)
-            .set(serie)
-            .addOnSuccessListener { documentReference ->
-                // La serie se agregó correctamente a Firestore
-                Toast.makeText(this, "Serie agregada correctamente", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener { exception ->
-                // Error al agregar la serie a Firestore
-                Toast.makeText(this, "Error al agregar la serie", Toast.LENGTH_SHORT).show()
-            }
-    }
 
-    // Función para mostrar las imágenes de películas en el HorizontalScrollView
+
+
+
+
+
     private fun mostrarImagenesPeliculas(peliculas: List<Pelicula>) {
         val imageContainer = findViewById<LinearLayout>(R.id.imageContainer)
         imageContainer.removeAllViews()
@@ -250,7 +255,7 @@ class PeliculasSeries : AppCompatActivity() {
 data class Pelicula(
     val titulo: String = "",
     val sinopsis: String = "",
-    val imagen: Int = 0, // Identificador de recurso de la imagen
+    val imagen: Int = 0,
     val videoUrl: String = ""
 )
 
@@ -258,6 +263,6 @@ data class Pelicula(
 data class Serie(
     val titulo: String = "",
     val sinopsis: String = "",
-    val imagen: Int = 0, // Identificador de recurso de la imagen
+    val imagen: Int = 0,
     val videoUrl: String = ""
 )

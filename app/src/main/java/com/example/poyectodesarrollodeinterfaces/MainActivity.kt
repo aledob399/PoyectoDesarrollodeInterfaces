@@ -38,19 +38,20 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         logInButton.setOnClickListener {
-            val username = usuarioEditText.text.toString().trim()
+            val nombreUsuario = usuarioEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
 
-            if (username.isNotEmpty() && password.isNotEmpty()) {
+            if (nombreUsuario.isNotEmpty() && password.isNotEmpty()) {
                 // Verificar las credenciales del usuario en Firestore
-                firestore.collection("usuarios").document(username).get()
+                firestore.collection("usuarios").document(nombreUsuario).get()
                     .addOnSuccessListener { documentSnapshot ->
                         if (documentSnapshot.exists()) {
                             val user = documentSnapshot.toObject(User::class.java)
                             if (user != null && user.password == password) {
 
                                 // Iniciar sesión exitosamente
-                                val intent = Intent(this@MainActivity, PeliculasSeries::class.java)
+                                val intent = Intent(this, PeliculasSeries::class.java)
+                                intent.putExtra("nombreUsuario",nombreUsuario)
                                 startActivity(intent)
                                 // Mostrar los datos del usuario en un Toast
                                 Toast.makeText(applicationContext, "Nombre de usuario: ${user.nombreUsuario}\nEmail: ${user.email}\nContraseña: ${user.password}", Toast.LENGTH_LONG).show()
