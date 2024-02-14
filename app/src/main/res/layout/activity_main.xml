@@ -1,90 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-
-
-
-    <TextView
-        android:id="@+id/encabezado"
-        android:layout_width="0dp"
-        android:layout_height="66dp"
-        android:background="@color/black"
+    <!-- Barra superior con el logo -->
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:paddingStart="50px"
-        android:paddingLeft="50px"
-        android:text="Login"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:padding="16dp"
+        android:background="#FFFFFF">
 
-    <EditText
-        android:id="@+id/usuario"
-        android:layout_width="wrap_content"
+        <!-- Logo de HBO -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logohbo"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+    <!-- Fondo -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/hbo_background"
+        android:scaleType="centerCrop" />
+
+    <!-- Contenedor principal -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="87dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="114dp"
-        android:ems="10"
-        android:hint="Usuario"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/contraseña"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/encabezado" />
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:padding="16dp">
 
-    <EditText
-        android:id="@+id/contraseña"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="86dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="115dp"
-        android:layout_marginBottom="33dp"
-        android:ems="10"
-        android:hint="Contraseña"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/acceder"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usuario" />
+        <!-- Logo de HBO -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/hbo_logo"
+            android:layout_marginBottom="32dp"
+            android:layout_gravity="center_horizontal"/>
 
-    <Button
-        android:id="@+id/acceder"
-        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
-        android:layout_width="155dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="10dp"
+        <!-- Campo de nombre de usuario -->
+        <EditText
+            android:id="@+id/editTextUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre de usuario"
+            android:background="@drawable/edit"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"/>
 
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="428dp"
-        android:text="Acceder"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/registrarse" />
+        <!-- Campo de correo electrónico -->
+        <EditText
+            android:id="@+id/editTextCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Correo electrónico"
+            android:background="@drawable/edit"
 
-    <Button
-        android:id="@+id/registrarse"
-        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
-        android:layout_width="155dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="430dp"
-        android:text="Registrarse"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/acceder"
-        app:layout_constraintStart_toStartOf="parent" />
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Campo de contraseña -->
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Contraseña"
+            android:inputType="textPassword"
+
+            android:background="@drawable/edit"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Botón de inicio de sesión -->
+        <Button
+            android:id="@+id/btnIniciarSesion"
+            style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Surface"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/boton"
+            android:padding="16dp"
+            android:text="Iniciar sesión"
+            android:textColor="#FFFFFF" />
+
+        <!-- Enlace para restablecer contraseña -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="¿Olvidaste tu contraseña?"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Botón para registrarse -->
+        <!-- Botón para registrarse -->
+        <Button
+            android:id="@+id/btnRegistrarse"
+            style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Surface"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/boton"
+            android:padding="16dp"
+            android:text="Registrarse"
+            android:textColor="#FFFFFF" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</RelativeLayout>
