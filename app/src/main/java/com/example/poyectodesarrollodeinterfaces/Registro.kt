@@ -33,13 +33,17 @@ class Registro : AppCompatActivity() {
 
     private fun setup() {
         val signUpButton = findViewById<Button>(R.id.registrarse)
+        val logInButton = findViewById<Button>(R.id.acceder)
         val usuarioEditText = findViewById<EditText>(R.id.usuario)
         val emailEditText = findViewById<EditText>(R.id.email)
         val passwordEditText = findViewById<EditText>(R.id.contraseña)
         val fotoPerfil = findViewById<ImageButton>(R.id.fotoPerfil)
 
         title = "Registro de Usuario"
-
+        logInButton.setOnClickListener {
+            val intent=Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
         signUpButton.setOnClickListener {
             val nombreUsuario = usuarioEditText.text.toString().trim()
             val email = emailEditText.text.toString().trim()

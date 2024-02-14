@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_negro_morado"
+    tools:context=".MainActivity">
 
     <!-- Barra superior con el logo -->
     <LinearLayout
@@ -11,78 +14,138 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:padding="16dp"
-        android:background="#FFFFFF">
+        android:padding="6dp"
+        android:background="@drawable/fondo_negro_morado">
 
-        <!-- Logo de HBO -->
+        <!-- Imagen para abrir el menú a la izquierda de "Series" -->
         <ImageView
+            android:id="@+id/imageMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/logohbo"
-            android:layout_gravity="center"/>
+            android:layout_marginStart="12dp"
+            android:src="@drawable/menu" />
 
+        <!-- Texto "Series" a la izquierda del logo de HBO -->
+
+        <!-- Logo de HBO centrado -->
+
+        <!-- Texto "Películas" a la derecha de "Series" -->
+
+        <!-- Logo de la lupa -->
+        <ImageView
+            android:id="@+id/logoHBO"
+            android:layout_width="139dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginEnd="60dp"
+            android:layout_gravity="center"
+            android:src="@drawable/logo" />
+
+        <ImageView
+            android:id="@+id/logoLupa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/lupa"
+            />
+
+        <!-- Textos "Iniciar sesión" y "Suscríbete" a la derecha del logo de la lupa -->
+
+        <!-- Vector asset de la imagen de usuario a la derecha de la lupa -->
+        <ImageView
+            android:id="@+id/imageUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:src="@drawable/usuario"
+            android:layout_marginEnd="6dp" />
     </LinearLayout>
-    <!-- Fondo -->
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/hbo_background"
-        android:scaleType="centerCrop" />
 
     <!-- Contenedor principal -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+
         android:layout_centerInParent="true"
+        android:orientation="vertical"
         android:padding="16dp">
 
         <!-- Logo de HBO -->
-        <ImageView
-            android:layout_width="match_parent"
+
+        <!-- Texto "Iniciar Sesión" -->
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/hbo_logo"
+            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="32dp"
-            android:layout_gravity="center_horizontal"/>
+            android:text="Iniciar Sesión"
+            android:textColor="@android:color/white"
+
+            android:textSize="24sp" />
 
         <!-- Campo de nombre de usuario -->
         <EditText
-            android:id="@+id/editTextUsuario"
+            android:id="@+id/usuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edit"
             android:hint="Nombre de usuario"
-            android:background="@drawable/edit"
             android:padding="12dp"
-            android:layout_marginBottom="16dp"/>
+            android:textColor="@android:color/white"
+            android:textColorHint="#A6A4AA"
+            android:textSize="40px" />
 
-        <!-- Campo de correo electrónico -->
-        <EditText
-            android:id="@+id/editTextCorreo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Correo electrónico"
-            android:background="@drawable/edit"
 
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"/>
 
         <!-- Campo de contraseña -->
-        <EditText
-            android:id="@+id/editTextPassword"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contraseña"
-            android:inputType="textPassword"
+            android:layout_marginBottom="16dp">
 
-            android:background="@drawable/edit"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"/>
+            <EditText
+                android:id="@+id/contraseña"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit"
+                android:hint="Contraseña"
+                android:inputType="textPassword"
+                android:padding="12dp"
+                android:textColor="@android:color/white"
+                android:textColorHint="#A6A4AA"
+                android:textSize="40px" />
+
+            <!-- Icono del ojo para mostrar/ocultar contraseña -->
+            <ImageView
+                android:id="@+id/imageShowPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12dp"
+                android:padding="12dp"
+                android:src="@drawable/ojo"
+                android:visibility="visible" />
+        </RelativeLayout>
 
         <!-- Botón de inicio de sesión -->
+
+        <!-- Enlace para restablecer contraseña -->
+
         <Button
-            android:id="@+id/btnIniciarSesion"
-            style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Surface"
-            android:layout_width="match_parent"
+            android:id="@+id/registrarse"
+
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/boton_final"
+            android:padding="16dp"
+            android:text="Registrarse"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/acceder"
+            android:layout_width="177dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:background="@drawable/boton"
@@ -90,28 +153,16 @@
             android:text="Iniciar sesión"
             android:textColor="#FFFFFF" />
 
-        <!-- Enlace para restablecer contraseña -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="¿Olvidaste tu contraseña?"
-            android:textColor="#FFFFFF"
-            android:gravity="center"
-            android:layout_marginBottom="16dp"/>
-
-        <!-- Botón para registrarse -->
-        <!-- Botón para registrarse -->
-        <Button
-            android:id="@+id/btnRegistrarse"
-            style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Surface"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/boton"
-            android:padding="16dp"
-            android:text="Registrarse"
+            android:gravity="center"
+            android:text="¿Olvidaste tu contraseña?"
             android:textColor="#FFFFFF" />
 
+        <!-- Botón para registrarse -->
+        <!-- Botón para registrarse -->
 
     </LinearLayout>
 </RelativeLayout>

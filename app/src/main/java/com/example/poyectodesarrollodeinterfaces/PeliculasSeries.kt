@@ -19,11 +19,11 @@ class PeliculasSeries : AppCompatActivity() {
     private val usuarioCollection = firestore.collection("usuario")
 
 
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_peliculas_series)
-
         val fotoPerfil = findViewById<ImageButton>(R.id.imgPerfil)
         val nombreUsuario = intent.getStringExtra("nombreUsuario")
         val pelis: List<Pelicula> = cargarPeliculas()
@@ -46,19 +46,40 @@ class PeliculasSeries : AppCompatActivity() {
         }
 
 
+
 /*
-        for (p in pelis) {
-            pelisCollection.add(p)
-                .addOnSuccessListener {
-                    Toast.makeText(this, "Pelicula añadida correctamente", Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener { e ->
-                    // Error al agregar la película
-                    Toast.makeText(this, "Error al añadir la pelicula", Toast.LENGTH_SHORT).show()
-                }
+        pelisCollection.get()
+    .addOnSuccessListener { documents ->
+        val batch = firestore.batch()
 
-
+        for (document in documents) {
+            batch.delete(document.reference)
         }
+
+        batch.commit()
+            .addOnSuccessListener {
+                // Después de borrar el contenido de la colección, procede a agregar nuevas películas
+                for (p in pelis) {
+                    pelisCollection.add(p)
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Película añadida correctamente", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { e ->
+                            // Error al agregar la película
+                            Toast.makeText(this, "Error al añadir la película", Toast.LENGTH_SHORT).show()
+                        }
+                }
+            }
+            .addOnFailureListener { exception ->
+                // Error al borrar el contenido de la colección
+                Toast.makeText(this, "Error al borrar el contenido de la colección", Toast.LENGTH_SHORT).show()
+            }
+    }
+    .addOnFailureListener { exception ->
+        // Error al obtener los documentos de la colección
+        Toast.makeText(this, "Error al obtener los documentos de la colección", Toast.LENGTH_SHORT).show()
+    }
+
 
  */
 
@@ -67,20 +88,43 @@ class PeliculasSeries : AppCompatActivity() {
 
 
 
+
 /*
-        for (s in series) {
-            seriesCollection.add(s)
-                .addOnSuccessListener {
-                    Toast.makeText(this, "Serie añadida correctamente", Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener { e ->
-                    // Error al agregar la serie
-                    Toast.makeText(this, "Error al añadir la serie", Toast.LENGTH_SHORT).show()
-                }
+        seriesCollection.get()
+    .addOnSuccessListener { documents ->
+        val batch = firestore.batch()
+
+        for (document in documents) {
+            batch.delete(document.reference)
         }
+
+        batch.commit()
+            .addOnSuccessListener {
+                // Después de borrar el contenido de la colección, procede a agregar nuevas películas
+                for (s in series) {
+                    seriesCollection.add(s)
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Serie añadida correctamente", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { e ->
+                            // Error al agregar la serie
+                            Toast.makeText(this, "Error al añadir la película", Toast.LENGTH_SHORT).show()
+                        }
+                }
+            }
+            .addOnFailureListener { exception ->
+                // Error al borrar el contenido de la colección
+                Toast.makeText(this, "Error al borrar el contenido de la colección", Toast.LENGTH_SHORT).show()
+            }
+    }
+    .addOnFailureListener { exception ->
+        // Error al obtener los documentos de la colección
+        Toast.makeText(this, "Error al obtener los documentos de la colección", Toast.LENGTH_SHORT).show()
+    }
 
 
  */
+
 
 
 
@@ -123,7 +167,6 @@ class PeliculasSeries : AppCompatActivity() {
     // Función para cargar todas las series de Firestore y guardarlas en una lista
     fun cargarSeries(): List<Serie> {
         val seriesList = mutableListOf<Serie>()
-
         firestore.collection("series")
             .get()
             .addOnSuccessListener { documents ->
@@ -141,6 +184,7 @@ class PeliculasSeries : AppCompatActivity() {
                 Toast.makeText(this, "Error al cargar la serie", Toast.LENGTH_SHORT).show()
             }
 
+
         return seriesList
     }
     // Función para crear un conjunto de películas
@@ -149,7 +193,7 @@ class PeliculasSeries : AppCompatActivity() {
 
         // Agregar películas a la lista
         peliculas.add(Pelicula("Max payne", "Para resolver una serie de asesinatos en Nueva York se unen un detective de policía y un asesino, que serán perseguidos por la policía, la mafia y una corporación despiadada.", R.drawable.maxpayne, "https://www.youtube.com/watch?v=GklHaGfncJI"))
-       // peliculas.add(Pelicula("El hombre lobo", "Al regresar a su tierra ancestral, un hombre americano es mordido y posteriormente maldecido por un hombre lobo.", R.drawable.elhombrelobo, "https://www.youtube.com/watch?v=Wff_63MgPPI"))
+        peliculas.add(Pelicula("El hombre lobo", "Al regresar a su tierra ancestral, un hombre americano es mordido y posteriormente maldecido por un hombre lobo.", R.drawable.elhombrelobo, "https://www.youtube.com/watch?v=Wff_63MgPPI"))
         peliculas.add(Pelicula("John Wick (Otro día para matar)", "Un ex-sicario sale de su retiro para perseguir a los gángsters que mataron a su perro y le robaron el coche.", R.drawable.johnwick, "https://www.youtube.com/watch?v=TWRxFTiNTyU"))
         peliculas.add(Pelicula("Juego de armas", "Basada libremente en la historia real de dos jóvenes, David Packouz y Efraim Diveroli, que consiguieron un contrato de trescientos millones de dólares del Pentágono para armar a los aliados de Estados Unidos en Afganistán.", R.drawable.juegodearmas, "https://www.youtube.com/watch?v=C0eT-Vcovqc"))
         peliculas.add(Pelicula("Los odiosos ocho", "En pleno invierno de Wyoming, un cazarrecompensas y su prisionero encuentran refugio en una cabaña habitada actualmente por una colección de nefastos personajes.", R.drawable.losodiososocho, "https://www.youtube.com/watch?v=JxVRgBOL8jc"))
@@ -174,7 +218,7 @@ class PeliculasSeries : AppCompatActivity() {
         series.add(Serie("Hermanos de sangre", "La historia de la Easy Company de la División Aerotransportada 101 del Ejército de los Estados Unidos y su misión en la Segunda Guerra Mundial en Europa, desde la Operación Overlord hasta el Día V-J.", R.drawable.hermanosdesangre, "https://www.youtube.com/watch?v=aH06LWZs-Ys"))
         series.add(Serie("Juego de tronos", "Nueve familias nobles luchan por el control de las tierras de Poniente, mientras un antiguo enemigo regresa tras permanecer inactivo durante milenios.", R.drawable.juegodetronos, ""))
         series.add(Serie("Chernobyl", "Esta apasionante miniserie narra la impactante historia del peor accidente provocado por el hombre de la historia, siguiendo la tragedia desde el momento de la explosión a primera hora de la mañana hasta el caos y la pérdida de vidas en los días, semanas y meses siguientes.", R.drawable.chernobyl, ""))
-       // series.add(Serie("Sherlock", "El peculiar giro del icónico detective de Conan Doyle lo presenta como un \"sociópata de alto funcionamiento\" en el Londres actual. Le ayuda en sus investigaciones: John Watson, veterano de la guerra de Afganistán, que es presentado a Holmes por un conocido común.", R.drawable.sherlock, ""))
+        series.add(Serie("Sherlock", "El peculiar giro del icónico detective de Conan Doyle lo presenta como un \"sociópata de alto funcionamiento\" en el Londres actual. Le ayuda en sus investigaciones: John Watson, veterano de la guerra de Afganistán, que es presentado a Holmes por un conocido común.", R.drawable.sherlock, ""))
         series.add(Serie("Los Soprano", "El jefe de la mafia de Nueva Jersey Tony Soprano se enfrenta a problemas personales y profesionales en su vida familiar y empresarial que afectan a su estado mental, lo que le lleva a buscar ayuda psiquiátrica profesional.", R.drawable.lossoprano, ""))
         series.add(Serie("Rick y Morty", "Las fracturadas vidas domésticas de un científico loco nihilista y su ansioso nieto se complican aún más con sus desventuras interdimensionales.", R.drawable.rickymorty, ""))
         series.add(Serie("Friends", "Sigue la vida personal y profesional de seis amigos de veinte a treinta años que viven en el barrio de Manhattan, en Nueva York.", R.drawable.friends, ""))
@@ -261,6 +305,7 @@ data class Pelicula(
     val imagen: Int = 0,
     val videoUrl: String = ""
 )
+
 
 
 data class Serie(
