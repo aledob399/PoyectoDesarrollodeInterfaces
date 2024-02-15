@@ -6,6 +6,49 @@
     tools:context=".PeliculasSeries"
     android:background="@drawable/fondo_negro_morado">
     <!-- Barra superior con el logo -->
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnSeries"
+        android:layout_marginBottom="40px"
+        android:layout_marginTop="216dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/imageContainer2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_launcher_foreground" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_launcher_foreground" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_launcher_foreground" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_launcher_foreground" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
     <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -62,9 +105,11 @@
         android:id="@+id/imgPerfilCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="234dp"
-        android:layout_marginTop="121dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="274dp"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="10dp"
+        android:layout_gravity="right"
+        android:layout_marginBottom="100px"
         app:cardCornerRadius="15dp"
         app:cardElevation="0dp">
 
@@ -72,9 +117,10 @@
             android:id="@+id/imgPerfil"
             android:layout_width="87dp"
             android:layout_height="92dp"
-            android:scaleType="centerCrop"
+
             android:background="@drawable/fondo_negro_morado"
-            android:backgroundTint="@color/black"/>
+            android:backgroundTint="@color/black"
+            android:scaleType="centerCrop" />
     </androidx.cardview.widget.CardView>
 
     <Button
@@ -91,8 +137,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imgPerfilCard"
-        android:layout_marginLeft="140dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="240dp"
+        android:layout_marginTop="11dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="Películas" />

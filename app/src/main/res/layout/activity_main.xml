@@ -96,7 +96,6 @@
             android:textSize="40px" />
 
 
-
         <!-- Campo de contraseña -->
         <RelativeLayout
             android:layout_width="match_parent"

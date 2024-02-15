@@ -240,8 +240,10 @@ class PeliculasSeries : AppCompatActivity() {
 
     private fun mostrarImagenesPeliculas(peliculas: List<Pelicula>) {
         val imageContainer = findViewById<LinearLayout>(R.id.imageContainer)
+        val imageContainer2 = findViewById<LinearLayout>(R.id.imageContainer2)
         imageContainer.removeAllViews()
-
+        imageContainer2.removeAllViews()
+        var pelisAleatorias=peliculas.shuffled()
         for ((index, pelicula) in peliculas.withIndex()) {
             val imageButton = ImageButton(this)
             val id = View.generateViewId() // Genera un ID único para el ImageButton
@@ -263,13 +265,36 @@ class PeliculasSeries : AppCompatActivity() {
             }
             imageContainer.addView(imageButton)
         }
+        for (index in pelisAleatorias.indices.reversed()) {
+            val pelicula = peliculas[index]
+            val imageButton = ImageButton(this)
+            val id = View.generateViewId()
+            imageButton.id = id
+            imageButton.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                setMargins(8.dpToPx(), 0, 8.dpToPx(), 0)
+            }
+            imageButton.setBackgroundResource(pelicula.imagen)
+            imageButton.setOnClickListener {
+                val intent = Intent(this, InfoPeliSerie::class.java)
+                intent.putExtra("titulo", pelicula.titulo)
+                intent.putExtra("sinopsis", pelicula.sinopsis)
+                intent.putExtra("imagen", pelicula.imagen)
+                intent.putExtra("videoUrl", pelicula.videoUrl)
+                startActivity(intent)
+            }
+            imageContainer2.addView(imageButton)
+        }
     }
 
-    // Función para mostrar las imágenes de series en el HorizontalScrollView
+
     private fun mostrarImagenesSeries(series: List<Serie>) {
         val imageContainer = findViewById<LinearLayout>(R.id.imageContainer)
+        val imageContainer2 = findViewById<LinearLayout>(R.id.imageContainer2)
         imageContainer.removeAllViews()
-
+        var seriesAleatorias=series.shuffled()
         for ((index, serie) in series.withIndex()) {
             val imageButton = ImageButton(this)
             val id = View.generateViewId() // Genera un ID único para el ImageButton
@@ -291,6 +316,29 @@ class PeliculasSeries : AppCompatActivity() {
             }
             imageContainer.addView(imageButton)
         }
+        for (index in seriesAleatorias.indices.reversed()) {
+            val serie = series[index]
+            val imageButton = ImageButton(this)
+            val id = View.generateViewId()
+            imageButton.id = id
+            imageButton.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                setMargins(8.dpToPx(), 0, 8.dpToPx(), 0)
+            }
+            imageButton.setBackgroundResource(serie.imagen)
+            imageButton.setOnClickListener {
+                val intent = Intent(this, InfoPeliSerie::class.java)
+                intent.putExtra("titulo", serie.titulo)
+                intent.putExtra("sinopsis", serie.sinopsis)
+                intent.putExtra("imagen", serie.imagen)
+                intent.putExtra("videoUrl", serie.videoUrl)
+                startActivity(intent)
+            }
+            imageContainer2.addView(imageButton)
+        }
+
     }
 
     // Función de extensión para convertir dp a píxeles

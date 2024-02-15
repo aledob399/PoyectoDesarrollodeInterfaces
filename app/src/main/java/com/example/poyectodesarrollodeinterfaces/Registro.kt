@@ -50,7 +50,7 @@ class Registro : AppCompatActivity() {
             val password = passwordEditText.text.toString().trim()
 
             if (nombreUsuario.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-                // Guardar los datos del usuario en Firestore
+
                 val user = User(nombreUsuario, email, password)
                 firestore.collection("usuarios").document(nombreUsuario)
                     .set(user)
