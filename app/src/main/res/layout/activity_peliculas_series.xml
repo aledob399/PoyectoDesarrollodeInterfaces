@@ -1,20 +1,23 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PeliculasSeries"
-    android:background="@drawable/fondo_negro_morado">
-    <!-- Barra superior con el logo -->
+    android:background="@drawable/fondo_negro_morado"
+    tools:context=".PeliculasSeries">
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnSeries"
-        android:layout_marginBottom="40px"
-        android:layout_marginTop="216dp"
-        android:scrollbars="none">
+        android:layout_marginBottom="32dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/accion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:id="@+id/imageContainer2"
@@ -113,14 +116,6 @@
         app:cardCornerRadius="15dp"
         app:cardElevation="0dp">
 
-        <ImageButton
-            android:id="@+id/imgPerfil"
-            android:layout_width="87dp"
-            android:layout_height="92dp"
-
-            android:background="@drawable/fondo_negro_morado"
-            android:backgroundTint="@color/black"
-            android:scaleType="centerCrop" />
     </androidx.cardview.widget.CardView>
 
     <Button
@@ -128,28 +123,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imgPerfilCard"
+
+        android:layout_marginTop="83dp"
+        android:layout_marginEnd="53dp"
+        android:layout_marginBottom="45dp"
         android:text="Series"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"/>
+        app:layout_constraintBottom_toTopOf="@+id/cienciaFiccion"
+        app:layout_constraintEnd_toStartOf="@+id/imgPerfil"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <Button
         android:id="@+id/btnPeliculas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imgPerfilCard"
-        android:layout_marginStart="240dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Películas" />
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="83dp"
+        android:layout_marginBottom="45dp"
+        android:text="Películas"
+        app:layout_constraintBottom_toTopOf="@+id/cienciaFiccion"
+        app:layout_constraintStart_toEndOf="@+id/btnSeries"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.505" />
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnSeries"
-        android:layout_marginTop="16dp"
-        android:scrollbars="none">
+        android:layout_marginBottom="24dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:id="@+id/imageContainer"
@@ -160,27 +168,72 @@
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher_foreground"
-                android:layout_margin="8dp"/>
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_launcher_foreground" />
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher_foreground"
-                android:layout_margin="8dp" />
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_launcher_foreground" />
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher_foreground"
-                android:layout_margin="8dp"/>
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_launcher_foreground" />
+
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher_foreground"
-                android:layout_margin="8dp"/>
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_launcher_foreground" />
 
         </LinearLayout>
     </HorizontalScrollView>
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/accion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="21dp"
+        android:text="TextView"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/cienciaFiccion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="22dp"
+        android:text="TextView"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/imgPerfilCard2"
+        android:layout_width="87dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="45dp"
+        app:cardCornerRadius="15dp"
+    app:layout_constraintBottom_toTopOf="@+id/cienciaFiccion"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+    <ImageButton
+        android:id="@+id/imgPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/fondo_negro_morado"
+        android:backgroundTint="@color/black"
+        android:scaleType="centerCrop" />
+</androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

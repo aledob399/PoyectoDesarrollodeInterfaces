@@ -21,7 +21,7 @@ class MiPerfil : AppCompatActivity() {
         val firestore = FirebaseFirestore.getInstance()
         val nombreUsuario = intent.getStringExtra("nombreUsuario")
         val fotoPerfil = findViewById<ImageView>(R.id.imgPerfil)
-        val documento = firestore.collection("usuarios").document(nombreUsuario!!)
+        val usuarios = firestore.collection("usuarios").document(nombreUsuario!!)
 
 
 
@@ -46,7 +46,7 @@ class MiPerfil : AppCompatActivity() {
 
 
 
-        documento.get()
+        usuarios.get()
             .addOnSuccessListener { documentSnapshot ->
                 if (documentSnapshot.exists()) {
                     val email = documentSnapshot.getString("email")

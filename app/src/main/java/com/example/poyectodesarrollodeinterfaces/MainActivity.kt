@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -42,7 +43,6 @@ class MainActivity : AppCompatActivity() {
             val password = passwordEditText.text.toString().trim()
 
             if (nombreUsuario.isNotEmpty() && password.isNotEmpty()) {
-                // Verificar las credenciales del usuario en Firestore
                 firestore.collection("usuarios").document(nombreUsuario).get()
                     .addOnSuccessListener { documentSnapshot ->
                         if (documentSnapshot.exists()) {

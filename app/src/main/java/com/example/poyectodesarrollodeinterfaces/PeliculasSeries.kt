@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -26,6 +28,8 @@ class PeliculasSeries : AppCompatActivity() {
         setContentView(R.layout.activity_peliculas_series)
         val fotoPerfil = findViewById<ImageButton>(R.id.imgPerfil)
         val nombreUsuario = intent.getStringExtra("nombreUsuario")
+        val accion=findViewById<TextView>(R.id.accion)
+        val cienciaFiccion=findViewById<TextView>(R.id.cienciaFiccion)
         val pelis: List<Pelicula> = cargarPeliculas()
         val series: List<Serie> = cargarSeries()
         mostrarImagenesPeliculas(pelis)
@@ -45,9 +49,9 @@ class PeliculasSeries : AppCompatActivity() {
             startActivity(intent)
         }
 
-
-
 /*
+
+
         pelisCollection.get()
     .addOnSuccessListener { documents ->
         val batch = firestore.batch()
@@ -81,7 +85,6 @@ class PeliculasSeries : AppCompatActivity() {
     }
 
 
- */
 
 
 
@@ -89,7 +92,8 @@ class PeliculasSeries : AppCompatActivity() {
 
 
 
-/*
+
+
         seriesCollection.get()
     .addOnSuccessListener { documents ->
         val batch = firestore.batch()
@@ -123,7 +127,7 @@ class PeliculasSeries : AppCompatActivity() {
     }
 
 
- */
+*/
 
 
 
@@ -241,19 +245,34 @@ class PeliculasSeries : AppCompatActivity() {
     private fun mostrarImagenesPeliculas(peliculas: List<Pelicula>) {
         val imageContainer = findViewById<LinearLayout>(R.id.imageContainer)
         val imageContainer2 = findViewById<LinearLayout>(R.id.imageContainer2)
+        val accion=findViewById<TextView>(R.id.accion)
+        val cienciaFiccion=findViewById<TextView>(R.id.cienciaFiccion)
         imageContainer.removeAllViews()
         imageContainer2.removeAllViews()
+
         var pelisAleatorias=peliculas.shuffled()
         for ((index, pelicula) in peliculas.withIndex()) {
             val imageButton = ImageButton(this)
             val id = View.generateViewId() // Genera un ID único para el ImageButton
             imageButton.id = id
             imageButton.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
             ).apply {
                 setMargins(8.dpToPx(), 0, 8.dpToPx(), 0)
             }
+            /*
+            val storageReference = FirebaseStorage.getInstance().reference.child("imagenes/${pelicula.titulo.toLowerCase().trim()}.jpg")
+            storageReference.downloadUrl.addOnSuccessListener { uri ->
+                Glide.with(this)
+                    .load(uri)
+                    .into(imageButton)
+            }.addOnFailureListener { exception ->
+                Toast.makeText(this, "Error al cargar la imagen de perfil", Toast.LENGTH_SHORT).show()
+            }
+
+             */
+
             imageButton.setBackgroundResource(pelicula.imagen)
             imageButton.setOnClickListener {
                 val intent=Intent(this,InfoPeliSerie::class.java)
@@ -263,20 +282,32 @@ class PeliculasSeries : AppCompatActivity() {
                 intent.putExtra("videoUrl",pelicula.videoUrl)
                 startActivity(intent)
             }
+
             imageContainer.addView(imageButton)
         }
         for (index in pelisAleatorias.indices.reversed()) {
-            val pelicula = peliculas[index]
+            val pelicula = pelisAleatorias[index]
             val imageButton = ImageButton(this)
             val id = View.generateViewId()
             imageButton.id = id
             imageButton.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
             ).apply {
                 setMargins(8.dpToPx(), 0, 8.dpToPx(), 0)
             }
-            imageButton.setBackgroundResource(pelicula.imagen)
+            /*
+            val storageReference = FirebaseStorage.getInstance().reference.child("imagenes/${pelicula.titulo.toLowerCase().trim()}.jpg")
+            storageReference.downloadUrl.addOnSuccessListener { uri ->
+                Glide.with(this)
+                    .load(uri)
+                    .into(imageButton)
+            }.addOnFailureListener { exception ->
+                Toast.makeText(this, "Error al cargar la imagen de perfil", Toast.LENGTH_SHORT).show()
+            }
+
+             */
+           imageButton.setBackgroundResource(pelicula.imagen)
             imageButton.setOnClickListener {
                 val intent = Intent(this, InfoPeliSerie::class.java)
                 intent.putExtra("titulo", pelicula.titulo)
@@ -286,60 +317,96 @@ class PeliculasSeries : AppCompatActivity() {
                 startActivity(intent)
             }
             imageContainer2.addView(imageButton)
+
         }
+        cienciaFiccion.text="Peliculas de ciencia ficcion"
+        accion.text="Peliculas de accion"
     }
 
 
     private fun mostrarImagenesSeries(series: List<Serie>) {
         val imageContainer = findViewById<LinearLayout>(R.id.imageContainer)
         val imageContainer2 = findViewById<LinearLayout>(R.id.imageContainer2)
+        val accion = findViewById<TextView>(R.id.accion)
+        val cienciaFiccion = findViewById<TextView>(R.id.cienciaFiccion)
         imageContainer.removeAllViews()
-        var seriesAleatorias=series.shuffled()
+        imageContainer2.removeAllViews()
+        var seriesAleatorias = series.shuffled()
+
+        val buttonSize = resources.getDimensionPixelSize(R.dimen.image_button_size) // Tamaño fijo para los botones
+
         for ((index, serie) in series.withIndex()) {
             val imageButton = ImageButton(this)
             val id = View.generateViewId() // Genera un ID único para el ImageButton
             imageButton.id = id
             imageButton.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
             ).apply {
-                setMargins(8.dpToPx(), 0, 8.dpToPx(), 0)
+                setMargins(2.dpToPx(), 0, 2.dpToPx(), 0)
             }
-            imageButton.setBackgroundResource(serie.imagen)
+            imageButton.scaleType = ImageView.ScaleType.FIT_CENTER // Escala la imagen para que se ajuste al ImageButton
+/*
+            val storageReference = FirebaseStorage.getInstance().reference.child("imagenes/${serie.titulo.toLowerCase().trim()}.jpg")
+            storageReference.downloadUrl.addOnSuccessListener { uri ->
+                Glide.with(this)
+                    .load(uri)
+                    .into(imageButton)
+            }.addOnFailureListener { exception ->
+                Toast.makeText(this, "Error al cargar la imagen de perfil", Toast.LENGTH_SHORT).show()
+            }
+
+ */         imageButton.setBackgroundResource(serie.imagen)
+
             imageButton.setOnClickListener {
                 val intent=Intent(this,InfoPeliSerie::class.java)
                 intent.putExtra("titulo",serie.titulo)
                 intent.putExtra("sinopsis",serie.sinopsis)
-                intent.putExtra("imagen",serie.imagen)
+                intent.putExtra("imagen",serie.titulo)
                 intent.putExtra("videoUrl",serie.videoUrl)
                 startActivity(intent)
             }
             imageContainer.addView(imageButton)
         }
+
         for (index in seriesAleatorias.indices.reversed()) {
-            val serie = series[index]
+            val serie = seriesAleatorias[index]
             val imageButton = ImageButton(this)
             val id = View.generateViewId()
             imageButton.id = id
             imageButton.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
             ).apply {
-                setMargins(8.dpToPx(), 0, 8.dpToPx(), 0)
+                setMargins(2.dpToPx(), 0, 2.dpToPx(), 0)
             }
-            imageButton.setBackgroundResource(serie.imagen)
+            imageButton.scaleType = ImageView.ScaleType.FIT_CENTER
+/*
+            val storageReference = FirebaseStorage.getInstance().reference.child("imagenes/${serie.titulo.toLowerCase().trim()}.jpg")
+            storageReference.downloadUrl.addOnSuccessListener { uri ->
+                Glide.with(this)
+                    .load(uri)
+                    .into(imageButton)
+            }.addOnFailureListener { exception ->
+                Toast.makeText(this, "Error al cargar la imagen de perfil", Toast.LENGTH_SHORT).show()
+            }
+
+ */         imageButton.setBackgroundResource(serie.imagen)
+
             imageButton.setOnClickListener {
                 val intent = Intent(this, InfoPeliSerie::class.java)
                 intent.putExtra("titulo", serie.titulo)
                 intent.putExtra("sinopsis", serie.sinopsis)
-                intent.putExtra("imagen", serie.imagen)
+                intent.putExtra("imagen", serie.titulo)
                 intent.putExtra("videoUrl", serie.videoUrl)
                 startActivity(intent)
             }
             imageContainer2.addView(imageButton)
         }
-
+        cienciaFiccion.text = "Series de ciencia ficcion"
+        accion.text = "Series de accion"
     }
+
 
     // Función de extensión para convertir dp a píxeles
     private fun Int.dpToPx(): Int {
