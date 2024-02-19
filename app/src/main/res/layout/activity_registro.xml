@@ -75,6 +75,7 @@
         <!-- Logo de HBO -->
 
         <!-- Texto "Iniciar Sesión" -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -84,18 +85,18 @@
             android:textColor="@android:color/white"
 
             android:textSize="24sp" />
-        <ImageButton
-            android:id="@+id/fotoPerfil"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="17dp"
-
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/ic_launcher_foreground" />
 
         <!-- Campo de nombre de usuario -->
+        <ImageButton
+            android:id="@+id/fotoPerfil"
+            android:layout_width="168dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center"
+
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/imagenperfil" />
+
         <EditText
             android:id="@+id/usuario"
             android:layout_width="match_parent"
@@ -124,7 +125,7 @@
         <!-- Campo de contraseña -->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginBottom="16dp">
 
             <EditText
@@ -159,7 +160,7 @@
         <Button
             android:id="@+id/registrarse"
             style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Surface"
-            android:layout_width="175dp"
+            android:layout_width="376dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:background="@drawable/boton"
@@ -169,20 +170,13 @@
 
         <Button
             android:id="@+id/acceder"
-            android:layout_width="177dp"
+            style="@style/Widget.Material3.ExtendedFloatingActionButton.Surface"
+            android:layout_width="378dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:background="@drawable/boton"
             android:padding="16dp"
             android:text="Iniciar sesión"
-            android:textColor="#FFFFFF" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:gravity="center"
-            android:text="¿Olvidaste tu contraseña?"
             android:textColor="#FFFFFF" />
 
         <!-- Botón para registrarse -->

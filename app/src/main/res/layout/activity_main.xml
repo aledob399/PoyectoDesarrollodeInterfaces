@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,10 +11,13 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/fondo_negro_morado"
         android:gravity="center_vertical"
-        android:padding="6dp"
-        android:background="@drawable/fondo_negro_morado">
+        android:orientation="horizontal"
+        android:padding="6dp">
 
         <!-- Imagen para abrir el menú a la izquierda de "Series" -->
         <ImageView
@@ -25,13 +27,7 @@
             android:layout_marginStart="12dp"
             android:src="@drawable/menu" />
 
-        <!-- Texto "Series" a la izquierda del logo de HBO -->
-
         <!-- Logo de HBO centrado -->
-
-        <!-- Texto "Películas" a la derecha de "Series" -->
-
-        <!-- Logo de la lupa -->
         <ImageView
             android:id="@+id/logoHBO"
             android:layout_width="139dp"
@@ -41,12 +37,12 @@
             android:layout_gravity="center"
             android:src="@drawable/logo" />
 
+        <!-- Logo de la lupa -->
         <ImageView
             android:id="@+id/logoLupa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/lupa"
-            />
+            android:src="@drawable/lupa" />
 
         <!-- Textos "Iniciar sesión" y "Suscríbete" a la derecha del logo de la lupa -->
 
@@ -56,20 +52,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:src="@drawable/usuario"
-            android:layout_marginEnd="6dp" />
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/usuario" />
     </LinearLayout>
 
     <!-- Contenedor principal -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
+        android:layout_height="449dp"
         android:layout_centerInParent="true"
         android:orientation="vertical"
         android:padding="16dp">
-
-        <!-- Logo de HBO -->
 
         <!-- Texto "Iniciar Sesión" -->
         <TextView
@@ -79,7 +72,6 @@
             android:layout_marginBottom="32dp"
             android:text="Iniciar Sesión"
             android:textColor="@android:color/white"
-
             android:textSize="24sp" />
 
         <!-- Campo de nombre de usuario -->
@@ -94,7 +86,6 @@
             android:textColor="@android:color/white"
             android:textColorHint="#A6A4AA"
             android:textSize="40px" />
-
 
         <!-- Campo de contraseña -->
         <RelativeLayout
@@ -133,8 +124,8 @@
 
         <Button
             android:id="@+id/registrarse"
-
-            android:layout_width="175dp"
+            style="@style/Widget.Material3.ExtendedFloatingActionButton.Surface"
+            android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:background="@drawable/boton_final"
@@ -144,24 +135,14 @@
 
         <Button
             android:id="@+id/acceder"
-            android:layout_width="177dp"
+            style="@style/Widget.Material3.ExtendedFloatingActionButton.Surface"
+            android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:background="@drawable/boton"
             android:padding="16dp"
             android:text="Iniciar sesión"
             android:textColor="#FFFFFF" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:gravity="center"
-            android:text="¿Olvidaste tu contraseña?"
-            android:textColor="#FFFFFF" />
-
-        <!-- Botón para registrarse -->
-        <!-- Botón para registrarse -->
 
     </LinearLayout>
 </RelativeLayout>

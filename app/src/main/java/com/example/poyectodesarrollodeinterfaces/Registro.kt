@@ -1,13 +1,16 @@
 package com.example.poyectodesarrollodeinterfaces
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.InputType
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
@@ -31,6 +34,7 @@ class Registro : AppCompatActivity() {
         setup()
     }
 
+
     private fun setup() {
         val signUpButton = findViewById<Button>(R.id.registrarse)
         val logInButton = findViewById<Button>(R.id.acceder)
@@ -38,6 +42,7 @@ class Registro : AppCompatActivity() {
         val emailEditText = findViewById<EditText>(R.id.email)
         val passwordEditText = findViewById<EditText>(R.id.contraseña)
         val fotoPerfil = findViewById<ImageButton>(R.id.fotoPerfil)
+        val imageShowPassword = findViewById<ImageView>(R.id.imageShowPassword)
 
         title = "Registro de Usuario"
         logInButton.setOnClickListener {
@@ -49,7 +54,7 @@ class Registro : AppCompatActivity() {
             val email = emailEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
 
-            if (nombreUsuario.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
+            if (nombreUsuario.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && isValidPassword(password)) {
 
                 val user = User(nombreUsuario, email, password)
                 firestore.collection("usuarios").document(nombreUsuario)
@@ -68,14 +73,30 @@ class Registro : AppCompatActivity() {
                         Toast.makeText(this, "Error al registrar usuario: ${e.message}", Toast.LENGTH_SHORT).show()
                     }
             } else {
-                Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
+                passwordEditText.error = "La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra mayúscula y un carácter especial."
             }
         }
         fotoPerfil.setOnClickListener {
             seleccionarImagen()
         }
+        imageShowPassword.setOnClickListener {
+            if (passwordEditText.inputType == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
+                passwordEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
+                imageShowPassword.setImageResource(R.drawable.ojo_cerrado)
+            } else {
+                passwordEditText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                imageShowPassword.setImageResource(R.drawable.ojo)
+            }
+            passwordEditText.setSelection(passwordEditText.text.length)
+        }
     }
 
+    private fun isValidPassword(password: String): Boolean {
+        // Definir el nuevo patrón de la contraseña
+        val pattern = "(?=.*[A-Z])(?=.*\\d).{8,}".toRegex()
+        // Verificar si la contraseña coincide con el nuevo patrón
+        return pattern.matches(password)
+    }
     private fun seleccionarImagen() {
         val intent = Intent().setType("image/*")
         intent.action = Intent.ACTION_GET_CONTENT
@@ -109,7 +130,7 @@ class Registro : AppCompatActivity() {
         builder.setTitle("Error")
         builder.setMessage("Se ha producido un error autenticando el usuario")
         builder.setPositiveButton("Aceptar", null)
-        val dialog: AlertDialog = builder.create()
+        val dialog = builder.create()
         dialog.show()
     }
 }
