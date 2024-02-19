@@ -30,9 +30,10 @@ class PeliculasSeries : AppCompatActivity() {
         val nombreUsuario = intent.getStringExtra("nombreUsuario")
         val accion=findViewById<TextView>(R.id.accion)
         val cienciaFiccion=findViewById<TextView>(R.id.cienciaFiccion)
-        val pelis: List<Pelicula> = cargarPeliculas()
-        val series: List<Serie> = cargarSeries()
-        mostrarImagenesPeliculas(pelis)
+        val pelis: List<Pelicula> = añadirPelis()
+        val series: List<Serie> = añadirSeries()
+        var inicio=true
+
         if (nombreUsuario != null) {
             val storageReference = FirebaseStorage.getInstance().reference.child("imagenes/$nombreUsuario.jpg")
             storageReference.downloadUrl.addOnSuccessListener { uri ->
@@ -49,7 +50,6 @@ class PeliculasSeries : AppCompatActivity() {
             startActivity(intent)
         }
 
-/*
 
 
         pelisCollection.get()
@@ -127,15 +127,18 @@ class PeliculasSeries : AppCompatActivity() {
     }
 
 
-*/
+
 
 
 
 
         val btnPelis = findViewById<Button>(R.id.btnPeliculas)
         val btnSeries = findViewById<Button>(R.id.btnSeries)
-
-
+        mostrarImagenesSeries(series)
+        if(inicio){
+            mostrarImagenesPeliculas(pelis)
+            inicio=false
+        }
 
         btnPelis.setOnClickListener {
             mostrarImagenesPeliculas(pelis)

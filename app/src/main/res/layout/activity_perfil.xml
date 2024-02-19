@@ -57,6 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
+        android:layout_marginTop="10dp"
         android:padding="16dp">
 
         <!-- Texto "Perfil" -->
@@ -65,8 +66,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="103dp"
-            android:layout_marginEnd="195dp"
+            android:layout_marginEnd="120dp"
             android:text="PERFIL"
+            android:textColor="@android:color/white"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -74,26 +76,34 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <!-- Imagen de perfil -->
-        <ImageView
-            android:id="@+id/imgPerfil"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imgPerfilCard2"
             android:layout_width="87dp"
             android:layout_height="92dp"
             android:layout_marginStart="150dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="150dp"
-            app:cardCornerRadius="50dp"
+            app:cardCornerRadius="15dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/perfil"
-            tools:srcCompat="@drawable/ic_launcher_foreground" />
+            app:layout_constraintTop_toBottomOf="@+id/perfil">
 
-        <!-- Edit Text para el email -->
+            <ImageButton
+                android:id="@+id/imgPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                tools:srcCompat="@drawable/ic_launcher_foreground" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- E  dit Text para el email -->
+
+
         <EditText
             android:id="@+id/editEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="170dp"
             android:background="@drawable/edit"
             android:hint="Email"
             android:inputType="textEmailAddress"
@@ -102,7 +112,7 @@
             android:textColorHint="#A6A4AA"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgPerfil" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!-- Edit Text para el nombre de usuario -->
         <EditText
@@ -132,33 +142,39 @@
             android:textColor="@android:color/white"
             android:textColorHint="#A6A4AA"
             android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/imageShowPassword"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editUsername" />
 
         <!-- Botón de atrás -->
+
+        <!-- Icono de ojo para mostrar/ocultar la contraseña -->
+
         <Button
             android:id="@+id/btnAtras"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Surface"
+            android:layout_width="212dp"
+            android:layout_height="60dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="72dp"
             android:layout_marginBottom="16dp"
             android:text="Atrás"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.873"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/editPassword"
+            app:layout_constraintVertical_bias="0.341" />
 
-        <!-- Icono de ojo para mostrar/ocultar la contraseña -->
         <ImageView
             android:id="@+id/imageShowPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="-24dp"
             android:src="@drawable/ojo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editPassword" />
+            app:layout_constraintBottom_toBottomOf="@+id/editPassword"
+            app:layout_constraintStart_toEndOf="@+id/editPassword"
+            app:layout_constraintTop_toTopOf="@+id/editPassword" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>

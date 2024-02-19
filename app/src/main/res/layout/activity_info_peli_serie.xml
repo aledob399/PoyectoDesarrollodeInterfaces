@@ -1,72 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InfoPeliSerie">
+    android:background="@drawable/fondo_negro_morado">
 
+    <!-- Barra de herramientas estilo HBO -->
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/fondo_negro_morado"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="6dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true">
 
+        <!-- Imagen para abrir el menú a la izquierda de "Series" -->
+        <ImageView
+            android:id="@+id/imageMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:src="@drawable/menu" />
 
-    <TextView
-        android:id="@+id/titulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        android:textSize="50dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.157"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <!-- Logo de HBO centrado -->
+        <ImageView
+            android:id="@+id/logoHBO"
+            android:layout_width="139dp"
+            android:layout_height="19dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="100dp"
+            android:layout_marginEnd="60dp"
+            android:src="@drawable/logo" />
 
-    <ImageView
-        android:id="@+id/imagen"
-        android:layout_width="153dp"
-        android:layout_height="181dp"
-        android:layout_marginTop="64dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.17"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titulo"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        <!-- Logo de la lupa -->
+        <ImageView
+            android:id="@+id/logoLupa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/lupa" />
 
-    <TextView
-        android:id="@+id/sinopsis"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="109dp"
-        android:layout_marginEnd="244dp"
-        android:layout_marginBottom="208dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        <!-- Vector asset de la imagen de usuario a la derecha de la lupa -->
+        <ImageView
+            android:id="@+id/imageUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/usuario" />
+    </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/videoUrl"
-        android:layout_width="80dp"
-        android:layout_height="69dp"
-        android:layout_marginTop="133dp"
-        android:layout_marginEnd="76dp"
-        android:layout_marginBottom="142dp"
-        app:layout_constraintBottom_toTopOf="@+id/atras"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:srcCompat="@android:drawable/ic_media_play" />
+    <!-- Contenedor principal -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:padding="16dp">
 
-    <Button
-        android:id="@+id/atras"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="118dp"
-        android:layout_marginEnd="67dp"
-        android:layout_marginBottom="304dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/sinopsis" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Título -->
+
+        <!-- Imagen -->
+
+        <TextView
+            android:id="@+id/titulo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Titulo de la Película/Serie"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imagen"
+            android:layout_width="300dp"
+            android:layout_height="171dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintDimensionRatio="H,16:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titulo"
+            tools:src="@drawable/ic_launcher_foreground" />
+
+        <!-- Sinopsis -->
+        <TextView
+            android:id="@+id/sinopsis"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/white"
+            android:text="Sinopsis de la Película/Serie"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imagen" />
+
+        <!-- Botón para ver video -->
+        <ImageButton
+            android:id="@+id/videoUrl"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="20dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_media_play"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sinopsis" />
+
+        <!-- Botón para volver atrás -->
+        <Button
+            android:id="@+id/atras"
+            style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Surface"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Atrás"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/videoUrl" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

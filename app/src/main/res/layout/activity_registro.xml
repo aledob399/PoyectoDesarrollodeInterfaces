@@ -9,8 +9,6 @@
 
     <!-- Barra superior con el logo -->
 
-
-
     <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -67,7 +65,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_centerInParent="true"
         android:orientation="vertical"
         android:padding="16dp">
@@ -83,25 +80,35 @@
             android:layout_marginBottom="32dp"
             android:text="Registro"
             android:textColor="@android:color/white"
-
             android:textSize="24sp" />
 
-        <!-- Campo de nombre de usuario -->
-        <ImageButton
-            android:id="@+id/fotoPerfil"
-            android:layout_width="168dp"
-            android:layout_height="170dp"
+        <!-- CardView para la foto de perfil -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imgPerfilCard2"
+            android:layout_width="87dp"
+            android:layout_height="92dp"
+            android:layout_marginTop="39dp"
+
             android:layout_gravity="center"
 
-            android:layout_marginTop="17dp"
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/imagenperfil" />
+            app:cardCornerRadius="15dp">
 
+            <ImageButton
+                android:id="@+id/fotoPerfil"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/usuario"
+                android:backgroundTint="@color/black"
+                android:scaleType="centerCrop" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Campo de nombre de usuario -->
         <EditText
             android:id="@+id/usuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:layout_marginTop="32dp"
             android:background="@drawable/edit"
             android:hint="Nombre de usuario"
             android:padding="12dp"

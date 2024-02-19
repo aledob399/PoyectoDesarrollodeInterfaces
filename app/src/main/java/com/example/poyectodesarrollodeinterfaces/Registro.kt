@@ -93,9 +93,12 @@ class Registro : AppCompatActivity() {
 
     private fun isValidPassword(password: String): Boolean {
         // Definir el nuevo patrón de la contraseña
-        val pattern = "(?=.*[A-Z])(?=.*\\d).{8,}".toRegex()
-        // Verificar si la contraseña coincide con el nuevo patrón
-        return pattern.matches(password)
+        if(password.length>=6){
+            val pattern = "(?=.*[A-Z])(?=.*\\d).{8,}".toRegex()
+            // Verificar si la contraseña coincide con el nuevo patrón
+            return pattern.matches(password)
+        }else return false
+
     }
     private fun seleccionarImagen() {
         val intent = Intent().setType("image/*")
