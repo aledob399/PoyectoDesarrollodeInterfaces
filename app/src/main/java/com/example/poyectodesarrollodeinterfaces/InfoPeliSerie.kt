@@ -33,8 +33,8 @@ class InfoPeliSerie : AppCompatActivity() {
         tituloTextView.text = titulo
         imagenImageView.setImageResource(imagen)
         videoUrlImageButton.setOnClickListener {
-            val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(webIntent)
+            val urlVideo = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(urlVideo)
         }
     }
 }

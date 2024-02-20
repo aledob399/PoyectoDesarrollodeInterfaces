@@ -6,7 +6,7 @@
     android:background="@drawable/fondo_negro_morado"
     tools:context=".MainActivity">
 
-    <!-- Barra superior con el logo -->
+
     <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -19,7 +19,6 @@
         android:orientation="horizontal"
         android:padding="6dp">
 
-        <!-- Imagen para abrir el menú a la izquierda de "Series" -->
         <ImageView
             android:id="@+id/imageMenu"
             android:layout_width="wrap_content"
@@ -27,7 +26,7 @@
             android:layout_marginStart="12dp"
             android:src="@drawable/menu" />
 
-        <!-- Logo de HBO centrado -->
+
         <ImageView
             android:id="@+id/logoHBO"
             android:layout_width="139dp"
@@ -37,16 +36,14 @@
             android:layout_gravity="center"
             android:src="@drawable/logo" />
 
-        <!-- Logo de la lupa -->
+
         <ImageView
             android:id="@+id/logoLupa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/lupa" />
 
-        <!-- Textos "Iniciar sesión" y "Suscríbete" a la derecha del logo de la lupa -->
 
-        <!-- Vector asset de la imagen de usuario a la derecha de la lupa -->
         <ImageView
             android:id="@+id/imageUsuario"
             android:layout_width="wrap_content"
@@ -56,7 +53,6 @@
             android:src="@drawable/usuario" />
     </LinearLayout>
 
-    <!-- Contenedor principal -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="449dp"
@@ -64,7 +60,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Texto "Iniciar Sesión" -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,7 +70,7 @@
             android:textColor="@android:color/white"
             android:textSize="24sp" />
 
-        <!-- Campo de nombre de usuario -->
+
         <EditText
             android:id="@+id/usuario"
             android:layout_width="match_parent"
@@ -87,7 +83,7 @@
             android:textColorHint="#A6A4AA"
             android:textSize="40px" />
 
-        <!-- Campo de contraseña -->
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -106,9 +102,9 @@
                 android:textColorHint="#A6A4AA"
                 android:textSize="40px" />
 
-            <!-- Icono del ojo para mostrar/ocultar contraseña -->
+
             <ImageView
-                android:id="@+id/imageShowPassword"
+                android:id="@+id/toogleContra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -119,22 +115,6 @@
                 android:visibility="visible" />
         </RelativeLayout>
 
-        <!-- Botón de inicio de sesión -->
-
-        <!-- Enlace para restablecer contraseña -->
-
-        <Button
-            android:id="@+id/registrarse"
-            style="@style/Widget.Material3.ExtendedFloatingActionButton.Surface"
-            android:layout_width="364dp"
-            android:layout_marginTop="8dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/boton_final"
-            android:padding="16dp"
-            android:text="Registrarse"
-            android:textColor="#FFFFFF" />
 
         <Button
             android:id="@+id/acceder"
@@ -147,6 +127,19 @@
             android:background="@drawable/boton"
             android:padding="16dp"
             android:text="Iniciar sesión"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/registrarse"
+            style="@style/Widget.Material3.ExtendedFloatingActionButton.Surface"
+            android:layout_width="364dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/boton_final"
+            android:padding="16dp"
+            android:text="Registrarse"
             android:textColor="#FFFFFF" />
 
     </LinearLayout>

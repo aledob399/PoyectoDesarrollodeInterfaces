@@ -42,7 +42,7 @@ class Registro : AppCompatActivity() {
         val emailEditText = findViewById<EditText>(R.id.email)
         val passwordEditText = findViewById<EditText>(R.id.contraseña)
         val fotoPerfil = findViewById<ImageButton>(R.id.fotoPerfil)
-        val imageShowPassword = findViewById<ImageView>(R.id.imageShowPassword)
+        val toogleContra = findViewById<ImageView>(R.id.toogleContra)
 
         title = "Registro de Usuario"
         logInButton.setOnClickListener {
@@ -54,7 +54,7 @@ class Registro : AppCompatActivity() {
             val email = emailEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
 
-            if (nombreUsuario.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && isValidPassword(password)) {
+            if (nombreUsuario.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && contraValida(password)) {
 
                 val user = User(nombreUsuario, email, password)
                 firestore.collection("usuarios").document(nombreUsuario)
@@ -64,7 +64,6 @@ class Registro : AppCompatActivity() {
                             subirImagen(nombreUsuario)
                         } else {
                             Toast.makeText(this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show()
-                            // Redirigir al usuario a la actividad de inicio de sesión
                             startActivity(Intent(this, MainActivity::class.java))
                             finish()
                         }
@@ -79,23 +78,21 @@ class Registro : AppCompatActivity() {
         fotoPerfil.setOnClickListener {
             seleccionarImagen()
         }
-        imageShowPassword.setOnClickListener {
+        toogleContra.setOnClickListener {
             if (passwordEditText.inputType == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
                 passwordEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
-                imageShowPassword.setImageResource(R.drawable.ojo_cerrado)
+                toogleContra.setImageResource(R.drawable.ojo_cerrado)
             } else {
                 passwordEditText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                imageShowPassword.setImageResource(R.drawable.ojo)
+                toogleContra.setImageResource(R.drawable.ojo)
             }
             passwordEditText.setSelection(passwordEditText.text.length)
         }
     }
 
-    private fun isValidPassword(password: String): Boolean {
-        // Definir el nuevo patrón de la contraseña
+    private fun contraValida(password: String): Boolean {
         if(password.length>=6){
             val pattern = "(?=.*[A-Z])(?=.*\\d).{8,}".toRegex()
-            // Verificar si la contraseña coincide con el nuevo patrón
             return pattern.matches(password)
         }else return false
 

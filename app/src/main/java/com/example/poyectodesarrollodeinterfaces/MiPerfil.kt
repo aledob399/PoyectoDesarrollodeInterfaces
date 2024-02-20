@@ -1,4 +1,5 @@
 package com.example.poyectodesarrollodeinterfaces
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,7 @@ class MiPerfil : AppCompatActivity() {
     private var imagenSeleccionada: Uri? = null
     private val PICK_IMAGE_REQUEST = 1
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perfil)
@@ -30,7 +32,7 @@ class MiPerfil : AppCompatActivity() {
         val editEmail = findViewById<EditText>(R.id.editEmail)
         val editUsername = findViewById<EditText>(R.id.editUsername)
         val editPassword = findViewById<EditText>(R.id.editPassword)
-        val imageShowPassword = findViewById<ImageView>(R.id.imageShowPassword)
+        val toogleContra = findViewById<ImageView>(R.id.toogleContra)
         val imgPerfil = findViewById<ImageButton>(R.id.imgPerfil)
 
 
@@ -50,8 +52,6 @@ class MiPerfil : AppCompatActivity() {
                     val email = document.getString("email")
                     val username = document.getString("nombreUsuario")
                     val password = document.getString("password")
-
-                    // Mostrar los datos actuales del usuario en los EditText
                     editEmail.setText(email)
                     editUsername.setText(username)
                     editPassword.setText(password)
@@ -68,31 +68,23 @@ class MiPerfil : AppCompatActivity() {
             val nuevoUsername = editUsername.text.toString().trim()
             val nuevaPassword = editPassword.text.toString().trim()
 
-            // Verificar que los nuevos datos no estén vacíos
             if (nuevoEmail.isNotEmpty() && nuevoUsername.isNotEmpty() && nuevaPassword.isNotEmpty()) {
-                // Verificar si la contraseña es adecuada
-                if (isValidPassword(nuevaPassword)) {
-                    // Actualizar los datos del usuario en Firebase
+                if (contraValida(nuevaPassword)) {
                     val user = User(nuevoUsername, nuevoEmail, nuevaPassword)
                     val datosActualizados = hashMapOf(
                         "email" to user.email,
                         "nombreUsuario" to user.nombreUsuario,
                         "password" to user.password
                     )
-
-                    // Actualizar los datos del usuario en Firebase y cambiar el nombre del documento
                     firestore.collection("usuarios").document(user.nombreUsuario)
                         .set(datosActualizados)
                         .addOnSuccessListener {
-                            // Eliminar el documento anterior del usuario
                             firestore.collection("usuarios").document(nombreUsuario).delete()
                                 .addOnSuccessListener {
-                                    // Subir la nueva imagen de perfil si se seleccionó una
                                     if (imagenSeleccionada != null) {
                                         subirImagenPerfil(user.nombreUsuario)
                                     } else {
                                         Toast.makeText(this, "Datos actualizados correctamente.", Toast.LENGTH_SHORT).show()
-                                        // Actualizar el nombre de usuario en la actividad
                                         nombreUsuario = user.nombreUsuario
                                     }
                                 }
@@ -119,26 +111,22 @@ class MiPerfil : AppCompatActivity() {
             seleccionarImagen()
         }
 
-        imageShowPassword.setOnClickListener {
-            // Cambiar el tipo de entrada de la contraseña para mostrar u ocultar
+        toogleContra.setOnClickListener {
             if (editPassword.inputType == android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
                 editPassword.inputType =
                     android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD or android.text.InputType.TYPE_CLASS_TEXT
-                imageShowPassword.setImageResource(R.drawable.ojo_cerrado)
+                toogleContra.setImageResource(R.drawable.ojo_cerrado)
             } else {
                 editPassword.inputType = android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                imageShowPassword.setImageResource(R.drawable.ojo)
+                toogleContra.setImageResource(R.drawable.ojo)
             }
-            // Mover el cursor al final del texto
             editPassword.setSelection(editPassword.text.length)
         }
     }
 
-    private fun isValidPassword(password: String): Boolean {
-        // Definir el nuevo patrón de la contraseña
+    private fun contraValida(password: String): Boolean {
         if(password.length>=6){
             val pattern = "(?=.*[A-Z])(?=.*\\d).{8,}".toRegex()
-            // Verificar si la contraseña coincide con el nuevo patrón
             return pattern.matches(password)
         }else return false
 
@@ -164,7 +152,6 @@ class MiPerfil : AppCompatActivity() {
         storageReference.putFile(imagenSeleccionada!!)
             .addOnSuccessListener {
                 Toast.makeText(this, "Datos actualizados correctamente.", Toast.LENGTH_SHORT).show()
-                // Actualizar el nombre de usuario en la actividad
                 this.nombreUsuario = nombreUsuario
             }
             .addOnFailureListener { e ->

@@ -62,7 +62,6 @@ class PeliculasSeries : AppCompatActivity() {
 
         batch.commit()
             .addOnSuccessListener {
-                // Después de borrar el contenido de la colección, procede a agregar nuevas películas
                 for (p in pelis) {
                     pelisCollection.add(p)
                         .addOnSuccessListener {
@@ -75,12 +74,10 @@ class PeliculasSeries : AppCompatActivity() {
                 }
             }
             .addOnFailureListener { exception ->
-                // Error al borrar el contenido de la colección
                 Toast.makeText(this, "Error al borrar el contenido de la colección", Toast.LENGTH_SHORT).show()
             }
     }
     .addOnFailureListener { exception ->
-        // Error al obtener los documentos de la colección
         Toast.makeText(this, "Error al obtener los documentos de la colección", Toast.LENGTH_SHORT).show()
     }
 
@@ -104,25 +101,21 @@ class PeliculasSeries : AppCompatActivity() {
 
         batch.commit()
             .addOnSuccessListener {
-                // Después de borrar el contenido de la colección, procede a agregar nuevas películas
                 for (s in series) {
                     seriesCollection.add(s)
                         .addOnSuccessListener {
                             Toast.makeText(this, "Serie añadida correctamente", Toast.LENGTH_SHORT).show()
                         }
                         .addOnFailureListener { e ->
-                            // Error al agregar la serie
                             Toast.makeText(this, "Error al añadir la película", Toast.LENGTH_SHORT).show()
                         }
                 }
             }
             .addOnFailureListener { exception ->
-                // Error al borrar el contenido de la colección
                 Toast.makeText(this, "Error al borrar el contenido de la colección", Toast.LENGTH_SHORT).show()
             }
     }
     .addOnFailureListener { exception ->
-        // Error al obtener los documentos de la colección
         Toast.makeText(this, "Error al obtener los documentos de la colección", Toast.LENGTH_SHORT).show()
     }
 
@@ -171,7 +164,6 @@ class PeliculasSeries : AppCompatActivity() {
         return peliculasList
     }
 
-    // Función para cargar todas las series de Firestore y guardarlas en una lista
     fun cargarSeries(): List<Serie> {
         val seriesList = mutableListOf<Serie>()
         firestore.collection("series")
@@ -194,11 +186,9 @@ class PeliculasSeries : AppCompatActivity() {
 
         return seriesList
     }
-    // Función para crear un conjunto de películas
     private fun añadirPelis(): List<Pelicula> {
         val peliculas = mutableListOf<Pelicula>()
 
-        // Agregar películas a la lista
         peliculas.add(Pelicula("Max payne", "Para resolver una serie de asesinatos en Nueva York se unen un detective de policía y un asesino, que serán perseguidos por la policía, la mafia y una corporación despiadada.", R.drawable.maxpayne, "https://www.youtube.com/watch?v=GklHaGfncJI"))
         peliculas.add(Pelicula("El hombre lobo", "Al regresar a su tierra ancestral, un hombre americano es mordido y posteriormente maldecido por un hombre lobo.", R.drawable.elhombrelobo, "https://www.youtube.com/watch?v=Wff_63MgPPI"))
         peliculas.add(Pelicula("John Wick (Otro día para matar)", "Un ex-sicario sale de su retiro para perseguir a los gángsters que mataron a su perro y le robaron el coche.", R.drawable.johnwick, "https://www.youtube.com/watch?v=TWRxFTiNTyU"))
@@ -220,7 +210,6 @@ class PeliculasSeries : AppCompatActivity() {
     private fun añadirSeries(): List<Serie> {
         val series = mutableListOf<Serie>()
 
-        // Agregar series a la lista
         series.add(Serie("Breaking bad", "Un profesor de instituto diagnosticado con cáncer de pulmón empieza a manufacturar y vender metamfetamina para asegurar el futuro de su familia.", R.drawable.breakingbad, "https://www.youtube.com/watch?v=HhesaQXLuRY"))
         series.add(Serie("Hermanos de sangre", "La historia de la Easy Company de la División Aerotransportada 101 del Ejército de los Estados Unidos y su misión en la Segunda Guerra Mundial en Europa, desde la Operación Overlord hasta el Día V-J.", R.drawable.hermanosdesangre, "https://www.youtube.com/watch?v=aH06LWZs-Ys"))
         series.add(Serie("Juego de tronos", "Nueve familias nobles luchan por el control de las tierras de Poniente, mientras un antiguo enemigo regresa tras permanecer inactivo durante milenios.", R.drawable.juegodetronos, ""))
@@ -336,11 +325,11 @@ class PeliculasSeries : AppCompatActivity() {
         imageContainer2.removeAllViews()
         var seriesAleatorias = series.shuffled()
 
-        val buttonSize = resources.getDimensionPixelSize(R.dimen.image_button_size) // Tamaño fijo para los botones
+
 
         for ((index, serie) in series.withIndex()) {
             val imageButton = ImageButton(this)
-            val id = View.generateViewId() // Genera un ID único para el ImageButton
+            val id = View.generateViewId()
             imageButton.id = id
             imageButton.layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -365,7 +354,7 @@ class PeliculasSeries : AppCompatActivity() {
                 val intent=Intent(this,InfoPeliSerie::class.java)
                 intent.putExtra("titulo",serie.titulo)
                 intent.putExtra("sinopsis",serie.sinopsis)
-                intent.putExtra("imagen",serie.titulo)
+                intent.putExtra("imagen",serie.imagen)
                 intent.putExtra("videoUrl",serie.videoUrl)
                 startActivity(intent)
             }
@@ -400,7 +389,7 @@ class PeliculasSeries : AppCompatActivity() {
                 val intent = Intent(this, InfoPeliSerie::class.java)
                 intent.putExtra("titulo", serie.titulo)
                 intent.putExtra("sinopsis", serie.sinopsis)
-                intent.putExtra("imagen", serie.titulo)
+                intent.putExtra("imagen", serie.imagen)
                 intent.putExtra("videoUrl", serie.videoUrl)
                 startActivity(intent)
             }
@@ -411,7 +400,6 @@ class PeliculasSeries : AppCompatActivity() {
     }
 
 
-    // Función de extensión para convertir dp a píxeles
     private fun Int.dpToPx(): Int {
         return (this * resources.displayMetrics.density).toInt()
     }

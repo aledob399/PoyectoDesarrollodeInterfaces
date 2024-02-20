@@ -56,12 +56,15 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:background="@drawable/fondo_negro_morado"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:padding="6dp"
-        android:background="@drawable/fondo_negro_morado">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Imagen para abrir el menú a la izquierda de "Series" -->
+
         <ImageView
             android:id="@+id/imageMenu"
             android:layout_width="wrap_content"
@@ -69,39 +72,29 @@
             android:layout_marginStart="12dp"
             android:src="@drawable/menu" />
 
-        <!-- Texto "Series" a la izquierda del logo de HBO -->
 
-        <!-- Logo de HBO centrado -->
-
-        <!-- Texto "Películas" a la derecha de "Series" -->
-
-        <!-- Logo de la lupa -->
         <ImageView
             android:id="@+id/logoHBO"
             android:layout_width="139dp"
             android:layout_height="19dp"
+            android:layout_gravity="center"
             android:layout_marginStart="100dp"
             android:layout_marginEnd="60dp"
-            android:layout_gravity="center"
             android:src="@drawable/logo" />
 
         <ImageView
             android:id="@+id/logoLupa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/lupa"
-            />
+            android:src="@drawable/lupa" />
 
-        <!-- Textos "Iniciar sesión" y "Suscríbete" a la derecha del logo de la lupa -->
-
-        <!-- Vector asset de la imagen de usuario a la derecha de la lupa -->
         <ImageView
             android:id="@+id/imageUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:src="@drawable/usuario"
-            android:layout_marginEnd="6dp" />
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/usuario" />
     </LinearLayout>
 
     <Button
@@ -110,10 +103,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_below="@+id/imgPerfilCard"
         android:layout_marginStart="16dp"
         android:layout_marginTop="83dp"
-        android:layout_marginBottom="45dp"
+        android:layout_marginBottom="25dp"
         android:text="Series"
         app:layout_constraintBottom_toTopOf="@+id/cienciaFiccion"
         app:layout_constraintStart_toStartOf="parent"
@@ -125,10 +117,10 @@
         style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Surface"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imgPerfilCard"
+
         android:layout_marginStart="40dp"
         android:layout_marginTop="83dp"
-        android:layout_marginBottom="45dp"
+        android:layout_marginBottom="25dp"
         android:text="Películas"
         app:layout_constraintBottom_toTopOf="@+id/cienciaFiccion"
         app:layout_constraintStart_toEndOf="@+id/btnSeries"

@@ -7,7 +7,7 @@
     android:background="@drawable/fondo_negro_morado"
     tools:context=".MiPerfil">
 
-    <!-- Barra superior con el logo -->
+
     <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -17,7 +17,6 @@
         android:padding="6dp"
         android:background="@drawable/fondo_negro_morado">
 
-        <!-- Imagen para abrir el menú a la izquierda de "Series" -->
         <ImageView
             android:id="@+id/imageMenu"
             android:layout_width="wrap_content"
@@ -25,7 +24,6 @@
             android:layout_marginStart="12dp"
             android:src="@drawable/menu" />
 
-        <!-- Logo de HBO centrado -->
         <ImageView
             android:id="@+id/logoHBO"
             android:layout_width="139dp"
@@ -35,14 +33,12 @@
             android:layout_gravity="center"
             android:src="@drawable/logo" />
 
-        <!-- Logo de la lupa -->
         <ImageView
             android:id="@+id/logoLupa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/lupa" />
 
-        <!-- Vector asset de la imagen de usuario a la derecha de la lupa -->
         <ImageView
             android:id="@+id/imageUsuario"
             android:layout_width="wrap_content"
@@ -52,7 +48,6 @@
             android:src="@drawable/usuario" />
     </LinearLayout>
 
-    <!-- Contenedor principal -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -60,7 +55,6 @@
         android:layout_marginTop="10dp"
         android:padding="16dp">
 
-        <!-- Texto "Perfil" -->
         <TextView
             android:id="@+id/perfil"
             android:layout_width="wrap_content"
@@ -75,7 +69,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Imagen de perfil -->
         <androidx.cardview.widget.CardView
             android:id="@+id/imgPerfilCard2"
             android:layout_width="87dp"
@@ -96,7 +89,6 @@
                 tools:srcCompat="@drawable/ic_launcher_foreground" />
         </androidx.cardview.widget.CardView>
 
-        <!-- E  dit Text para el email -->
 
 
         <EditText
@@ -114,7 +106,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Edit Text para el nombre de usuario -->
         <EditText
             android:id="@+id/editUsername"
             android:layout_width="wrap_content"
@@ -129,7 +120,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editEmail" />
 
-        <!-- Edit Text para la contraseña -->
+
         <EditText
             android:id="@+id/editPassword"
             android:layout_width="wrap_content"
@@ -142,13 +133,10 @@
             android:textColor="@android:color/white"
             android:textColorHint="#A6A4AA"
             android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/imageShowPassword"
+            app:layout_constraintEnd_toStartOf="@+id/toogleContra"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editUsername" />
 
-        <!-- Botón de atrás -->
-
-        <!-- Icono de ojo para mostrar/ocultar la contraseña -->
 
         <Button
             android:id="@+id/btnAtras"
@@ -167,7 +155,7 @@
             app:layout_constraintVertical_bias="0.341" />
 
         <ImageView
-            android:id="@+id/imageShowPassword"
+            android:id="@+id/toogleContra"
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:layout_marginStart="-24dp"

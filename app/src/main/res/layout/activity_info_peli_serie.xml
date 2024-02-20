@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/fondo_negro_morado">
 
-    <!-- Barra de herramientas estilo HBO -->
+
     <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true">
 
-        <!-- Imagen para abrir el menú a la izquierda de "Series" -->
+
         <ImageView
             android:id="@+id/imageMenu"
             android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
             android:layout_marginStart="12dp"
             android:src="@drawable/menu" />
 
-        <!-- Logo de HBO centrado -->
+
         <ImageView
             android:id="@+id/logoHBO"
             android:layout_width="139dp"
@@ -37,14 +37,14 @@
             android:layout_marginEnd="60dp"
             android:src="@drawable/logo" />
 
-        <!-- Logo de la lupa -->
+
         <ImageView
             android:id="@+id/logoLupa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/lupa" />
 
-        <!-- Vector asset de la imagen de usuario a la derecha de la lupa -->
+
         <ImageView
             android:id="@+id/imageUsuario"
             android:layout_width="wrap_content"
@@ -54,16 +54,14 @@
             android:src="@drawable/usuario" />
     </LinearLayout>
 
-    <!-- Contenedor principal -->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
         android:padding="16dp">
 
-        <!-- Título -->
 
-        <!-- Imagen -->
 
         <TextView
             android:id="@+id/titulo"
@@ -92,7 +90,6 @@
             app:layout_constraintTop_toBottomOf="@+id/titulo"
             tools:src="@drawable/ic_launcher_foreground" />
 
-        <!-- Sinopsis -->
         <TextView
             android:id="@+id/sinopsis"
             android:layout_width="0dp"
@@ -107,7 +104,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imagen" />
 
-        <!-- Botón para ver video -->
+
         <ImageButton
             android:id="@+id/videoUrl"
             android:layout_width="80dp"
@@ -120,7 +117,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sinopsis" />
 
-        <!-- Botón para volver atrás -->
         <Button
             android:id="@+id/atras"
             style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Surface"

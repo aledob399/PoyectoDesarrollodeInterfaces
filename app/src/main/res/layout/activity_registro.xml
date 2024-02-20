@@ -7,7 +7,7 @@
     android:background="@drawable/fondo_negro_morado"
     tools:context=".Registro">
 
-    <!-- Barra superior con el logo -->
+
 
     <LinearLayout
         android:id="@+id/toolbar"
@@ -18,7 +18,7 @@
         android:padding="6dp"
         android:background="@drawable/fondo_negro_morado">
 
-        <!-- Imagen para abrir el menú a la izquierda de "Series" -->
+
         <ImageView
             android:id="@+id/imageMenu"
             android:layout_width="wrap_content"
@@ -26,13 +26,7 @@
             android:layout_marginStart="12dp"
             android:src="@drawable/menu" />
 
-        <!-- Texto "Series" a la izquierda del logo de HBO -->
 
-        <!-- Logo de HBO centrado -->
-
-        <!-- Texto "Películas" a la derecha de "Series" -->
-
-        <!-- Logo de la lupa -->
         <ImageView
             android:id="@+id/logoHBO"
             android:layout_width="139dp"
@@ -49,9 +43,7 @@
             android:src="@drawable/lupa"
             />
 
-        <!-- Textos "Iniciar sesión" y "Suscríbete" a la derecha del logo de la lupa -->
 
-        <!-- Vector asset de la imagen de usuario a la derecha de la lupa -->
         <ImageView
             android:id="@+id/imageUsuario"
             android:layout_width="wrap_content"
@@ -61,7 +53,7 @@
             android:layout_marginEnd="6dp" />
     </LinearLayout>
 
-    <!-- Contenedor principal -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,9 +61,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Logo de HBO -->
 
-        <!-- Texto "Iniciar Sesión" -->
 
         <TextView
             android:layout_width="wrap_content"
@@ -82,7 +72,7 @@
             android:textColor="@android:color/white"
             android:textSize="24sp" />
 
-        <!-- CardView para la foto de perfil -->
+
         <androidx.cardview.widget.CardView
             android:id="@+id/imgPerfilCard2"
             android:layout_width="87dp"
@@ -102,7 +92,7 @@
                 android:scaleType="centerCrop" />
         </androidx.cardview.widget.CardView>
 
-        <!-- Campo de nombre de usuario -->
+
         <EditText
             android:id="@+id/usuario"
             android:layout_width="match_parent"
@@ -116,7 +106,7 @@
             android:textColorHint="#A6A4AA"
             android:textSize="40px" />
 
-        <!-- Campo de correo electrónico -->
+
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
@@ -129,7 +119,7 @@
             android:textColorHint="#A6A4AA"
             android:textSize="40px" />
 
-        <!-- Campo de contraseña -->
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -147,9 +137,9 @@
                 android:textColorHint="#A6A4AA"
                 android:textSize="40px" />
 
-            <!-- Icono del ojo para mostrar/ocultar contraseña -->
+
             <ImageView
-                android:id="@+id/imageShowPassword"
+                android:id="@+id/toogleContra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -183,7 +173,7 @@
             android:layout_marginBottom="16dp"
             android:background="@drawable/boton"
             android:padding="16dp"
-            android:text="Iniciar sesión"
+            android:text="Atras"
             android:textColor="#FFFFFF" />
 
         <!-- Botón para registrarse -->
